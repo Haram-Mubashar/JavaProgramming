@@ -1,31 +1,33 @@
-public class Game{
+public class Game {
+    Player[] players;
+    Deck deck;
 
-       public String toString(){
+    Game(Player[] players, Deck deck) {
+        this.players = players;
+        this.deck = deck;
+        deck.shuffle();
+    }
 
-       return playersDetails.toString();
-       }
+    public void playRound() {
+        for (int i = 0; i < players.length; i++) {
+            Card drawn = deck.draw();
+            System.out.println(players[i].name + " drew " + drawn);
+        }
+    }
 
-  }
+    public Player highestScore() {
+        Player best = players[0];
+        for (int i = 1; i < players.length; i++) {
+            if (players[i].score > best.score) {
+                best = players[i];
+            }
+        }
+        return best;
+    }
 
-public class Player{
-
-        String name;
-        int score;
-        Card[] hand;
+    public void roundWinner() {
+        Player best = highestScore();
+        System.out.println("winner is " + best);
         
-
-       Player(String name){
-
-          this.name=name;
-       }
-
-       public String toString(){
-
-       return String.format("%s %d %s", name , score, hand);
-
-       }
-
+  }
 }
-
-
-
